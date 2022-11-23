@@ -1,21 +1,20 @@
 import React from 'react';
-import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+import { screen } from '@testing-library/react';
 import renderWithRouter from './renderWithRouter';
 import pokemonList from '../data';
 import Pokemon from '../components/Pokemon';
 
 test('Checa Pokedex', () => {
   const pokemon = pokemonList[0];
-  renderWithRouter(<Pokemon 
-    isFavorite={ true }
+  renderWithRouter(<Pokemon
+    isFavorite
     pokemon={ pokemon }
   />);
-  const image = screen.getByAltText(`${pokemon.name} sprite`)
+  const image = screen.getByAltText(`${pokemon.name} sprite`);
   expect(image).toBeInTheDocument();
   expect(image.getAttribute('src')).toBe(pokemon.image);
 
-  const favImage = screen.getByAltText(`${pokemon.name} is marked as favorite`)
+  const favImage = screen.getByAltText(`${pokemon.name} is marked as favorite`);
   expect(favImage).toBeInTheDocument();
   expect(favImage.getAttribute('src')).toBe('/star-icon.svg');
 
